@@ -23,10 +23,12 @@ import {
 } from "@mui/material";
 import {
   IconArrowRight,
-  IconCalendarDollar,
+  IconCalendarCheck,
+  IconClipboardList,
   IconMail,
   IconSearch,
   IconShield,
+  IconTool,
   IconUser
 } from "@tabler/icons-react";
 import { useMemo, useState } from 'react';
@@ -41,28 +43,28 @@ export default function Dashboard() {
   // Create pages with correct URLs based on environment
   const allPages = useMemo(() => [
     {
-      title: "Loan Overview",
-      description: "View loan performance overview and analytics",
-      icon: IconCalendarDollar,
-      href: "/loan/overview",
+      title: "Requests",
+      description: "View and manage maintenance requests",
+      icon: IconClipboardList,
+      href: "/maintenance",
       color: "primary",
-      chip: "New"
+      chip: "Core"
     },
     {
-      title: "Client Performance",
-      description: "Analyze client performance metrics and trends",
-      icon: IconCalendarDollar,
-      href: "/loan/client-performance",
+      title: "Clients",
+      description: "Manage client list for maintenance requests",
+      icon: IconCalendarCheck,
+      href: "/maintenance/client",
       color: "secondary",
-      chip: "Analytics"
+      chip: "Master Data"
     },
     {
-      title: "Non-Performing List",
-      description: "View and manage non-performing loan accounts",
-      icon: IconCalendarDollar,
-      href: "/loan/non-performing-list",
+      title: "Tukang",
+      description: "Manage tukang profiles and assignment details",
+      icon: IconTool,
+      href: "/maintenance/tukang",
       color: "warning",
-      chip: "Management"
+      chip: "Master Data"
     }
   ], []);
 
@@ -80,15 +82,15 @@ export default function Dashboard() {
 
   return (
     <ProtectedRoute requiredRoles={getPageRoles('AUTHENTICATED_ONLY')}>
-      <PageContainer title="Valdo Dashboard" description="Welcome to Valdo Dashboard">
+      <PageContainer title="SERVICE DASHBOARD" description="Welcome to SERVICE DASHBOARD">
         <Box mt={3}>
           {/* Header */}
           <Box mb={4}>
             <Typography variant="h2" fontWeight="bold" color="primary" gutterBottom>
-              Valdo Dashboard
+              SERVICE DASHBOARD
             </Typography>
             <Typography variant="h6" color="textSecondary">
-              Welcome back! Here's your overview and quick access to your tools.
+              Welcome back! Manage requests, clients, and tukang from one place.
             </Typography>
           </Box>
 
@@ -288,7 +290,7 @@ export default function Dashboard() {
                       }}
                     >
                       <Typography variant="body2" color="textSecondary" textAlign="center">
-                        More features and pages will be available soon...
+                        This workspace is focused on maintenance operations.
                       </Typography>
                     </Paper>
                   </Box>

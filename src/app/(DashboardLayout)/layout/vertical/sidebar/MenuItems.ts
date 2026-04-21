@@ -1,14 +1,9 @@
 import {
-  IconBox,
-  IconBuilding,
-  IconCashBanknote,
-  IconDashboard,
-  IconFileInvoice,
-  IconGraph,
   IconHome,
-  IconMask,
+  IconTool,
+  IconUsers,
+  IconUserCog,
   // IconPaywall,
-  IconUserCancel
 } from "@tabler/icons-react";
 import { uniqueId } from "lodash";
 import { ROLES } from "@/config/roles";
@@ -44,6 +39,10 @@ const Menuitems: MenuitemsType[] = [
     // chip: "New",
     // chipColor: "secondary",
   },
+  {
+    navlabel: true,
+    subheader: "Maintenance",
+  },
   // {
   //   id: uniqueId(),
   //   title: "Kasbon",
@@ -52,74 +51,6 @@ const Menuitems: MenuitemsType[] = [
   //   href: "/kasbon",
   //   chipColor: "secondary"
   // },
-  {
-    navlabel: true,
-    subheader: "Analytics",
-  },
-  {
-    id: uniqueId(),
-    title: "Loans",
-    icon: IconCashBanknote,
-    href: "/loan",
-    requiredRoles: [ROLES.ADMIN, ROLES.LOAN],
-    children: [
-      {
-        id: uniqueId(),
-        title: "Overview",
-        icon: IconDashboard,
-        href: "/loan/overview",
-        chipColor: "secondary",
-      },
-      {
-        id: uniqueId(),
-        title: "Client Performance",
-        icon: IconGraph,
-        href: "/loan/client-performance",
-      },
-      {
-        id: uniqueId(),
-        title: "Non-Performing List",
-        icon: IconUserCancel,
-        href: "/loan/non-performing-list",
-      },
-      
-    ],
-  },
-  {
-    id: uniqueId(),
-    title: "Internal Payroll",
-    icon: IconBox,
-    href: "/internal-payroll",
-    chip: "New",
-    requiredRoles: [ROLES.ADMIN, ROLES.PAYROLL],
-    children: [
-      {
-        id: uniqueId(),
-        title: "Overview",
-        icon: IconDashboard,
-        href: "/internal-payroll",
-        
-        chipColor: "secondary",
-      },
-      {
-        id: uniqueId(),
-        title: "Department",
-        icon: IconBuilding,
-        href: "/internal-payroll/department",
-    
-        chipColor: "secondary",
-      },
-      {
-        id: uniqueId(),
-        title: "Cost Owner",
-        icon: IconMask,
-        href: "/internal-payroll/cost-owner",
-    
-        chipColor: "secondary",
-      },
-      
-    ],
-  },
   // {
   //   id: uniqueId(),
   //   title: "External Payroll",
@@ -158,12 +89,23 @@ const Menuitems: MenuitemsType[] = [
 
   {
     id: uniqueId(),
-    title: "Invoice",
-    icon: IconFileInvoice,
-    href: "/invoice",
+    title: "Requests",
+    icon: IconTool,
+    href: "/maintenance",
     chip: "New",
   },
-
+  {
+    id: uniqueId(),
+    title: "Clients",
+    icon: IconUsers,
+    href: "/maintenance/client",
+  },
+  {
+    id: uniqueId(),
+    title: "Tukang",
+    icon: IconUserCog,
+    href: "/maintenance/tukang",
+  },
   // {
   //   navlabel: true,
   //   subheader: "Other",
