@@ -1,0 +1,627 @@
+{
+  "info": {
+    "_postman_id": "92c00ca9-df50-48c4-a08f-4b51a971e248",
+    "name": "Finance X Kenzie",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "18833398"
+  },
+  "item": [
+    {
+      "name": "Customer Insight",
+      "item": [
+        {
+          "name": "Clients by Invoice",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "token",
+                  "value": "e76400cc5a22d09a7a2a306c39f7050221418fc9eb667b6e4ed3e365723146aa",
+                  "type": "text",
+                  "uuid": "0c6d947b-a71b-46b0-824a-5a07f9209573"
+                },
+                {
+                  "key": "employer",
+                  "value": "0",
+                  "description": "0 => All, 1 => PT Valdo International, 2 => PT Valdo Sumber Daya Mandiri, 94 => PT Toko Pandai",
+                  "type": "text",
+                  "uuid": "9455e847-fa47-43a0-9385-5aef9d3d69d5"
+                },
+                {
+                  "key": "product_type",
+                  "value": "0",
+                  "description": "0 => All, 1 => BPO Bundling, 2 => People, 3 => Infra & Technology, 4 => AkuMaju",
+                  "type": "text",
+                  "uuid": "c292969c-5e73-4567-8200-e4afa3c0e5dc"
+                },
+                {
+                  "key": "customer_segment",
+                  "value": "0",
+                  "description": "0 => All, 1 => Non BFSI Logistic, 2 => Non BFSI F&B, 3 => BFSI Bank, 4 => Non BFSI Others, 5 => Non BFSI Distribution, 6 => Non BFSI E-commerce, 7 => BFSI Insurance, 8 => BFSI Multi Finance, 9 => BFSI Others",
+                  "type": "text",
+                  "uuid": "ba05f56e-07cd-4011-88f9-3bf6831da577"
+                },
+                {
+                  "key": "sourced_to",
+                  "value": "0",
+                  "description": "0 => All",
+                  "type": "text",
+                  "uuid": "6a98b6a0-eb7f-4de1-b5ae-099ef071736c"
+                },
+                {
+                  "key": "project",
+                  "value": "0",
+                  "description": "0 => All",
+                  "type": "text",
+                  "uuid": "623abaa0-02df-40e2-ae78-528ec77a4019"
+                },
+                {
+                  "key": "month",
+                  "value": "03",
+                  "description": "\"0\" => All, \"01\" => January, \"02\" => February, \"03\" => March, \"04\" => April, \"05\" => May, \"06\" => June, \"07\" => July, \"08\" => August, \"09\" => September, \"10\" => October, \"11\" => November, \"12\" => December",
+                  "type": "text",
+                  "uuid": "549225fd-06f0-4d87-af6c-0a54464e1e50"
+                },
+                {
+                  "key": "year",
+                  "value": "2026",
+                  "type": "text",
+                  "uuid": "f14e584d-b58e-427e-b8e4-d95fda8b31bb"
+                },
+                {
+                  "key": "draw",
+                  "value": "1",
+                  "type": "text",
+                  "uuid": "eb24d72c-36c0-4ccf-9ff9-958b22456326"
+                },
+                {
+                  "key": "start",
+                  "value": "0",
+                  "type": "text",
+                  "uuid": "d33cdea6-71db-41e6-abc2-fde6ce8af632"
+                },
+                {
+                  "key": "length",
+                  "value": "1000",
+                  "type": "text",
+                  "uuid": "17b831d0-4672-45c2-bcaf-7cbd4b988cc8"
+                },
+                {
+                  "key": "search[value]",
+                  "value": "",
+                  "type": "text",
+                  "uuid": "2c537a29-f8bc-4a00-a5bf-7fd702a77112"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/dashboard/client_by_invoice",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "dashboard",
+                "client_by_invoice"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Clients by Outstanding",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "token",
+                  "value": "e76400cc5a22d09a7a2a306c39f7050221418fc9eb667b6e4ed3e365723146aa",
+                  "type": "text",
+                  "uuid": "0c6d947b-a71b-46b0-824a-5a07f9209573"
+                },
+                {
+                  "key": "employer",
+                  "value": "0",
+                  "description": "0 => All, 1 => PT Valdo International, 2 => PT Valdo Sumber Daya Mandiri, 94 => PT Toko Pandai",
+                  "type": "text",
+                  "uuid": "9455e847-fa47-43a0-9385-5aef9d3d69d5"
+                },
+                {
+                  "key": "product_type",
+                  "value": "0",
+                  "description": "0 => All, 1 => BPO Bundling, 2 => People, 3 => Infra & Technology, 4 => AkuMaju",
+                  "type": "text",
+                  "uuid": "c292969c-5e73-4567-8200-e4afa3c0e5dc"
+                },
+                {
+                  "key": "customer_segment",
+                  "value": "0",
+                  "description": "0 => All, 1 => Non BFSI Logistic, 2 => Non BFSI F&B, 3 => BFSI Bank, 4 => Non BFSI Others, 5 => Non BFSI Distribution, 6 => Non BFSI E-commerce, 7 => BFSI Insurance, 8 => BFSI Multi Finance, 9 => BFSI Others",
+                  "type": "text",
+                  "uuid": "ba05f56e-07cd-4011-88f9-3bf6831da577"
+                },
+                {
+                  "key": "sourced_to",
+                  "value": "0",
+                  "description": "0 => All",
+                  "type": "text",
+                  "uuid": "0d086b88-e95d-4b0c-9162-57186b88c839"
+                },
+                {
+                  "key": "project",
+                  "value": "0",
+                  "description": "0 => All",
+                  "type": "text",
+                  "uuid": "2f6269ab-1ab8-474b-85a1-4d1cd42b171e"
+                },
+                {
+                  "key": "month",
+                  "value": "03",
+                  "description": "\"0\" => All, \"01\" => January, \"02\" => February, \"03\" => March, \"04\" => April, \"05\" => May, \"06\" => June, \"07\" => July, \"08\" => August, \"09\" => September, \"10\" => October, \"11\" => November, \"12\" => December",
+                  "type": "text",
+                  "uuid": "549225fd-06f0-4d87-af6c-0a54464e1e50"
+                },
+                {
+                  "key": "year",
+                  "value": "2026",
+                  "type": "text",
+                  "uuid": "f14e584d-b58e-427e-b8e4-d95fda8b31bb"
+                },
+                {
+                  "key": "draw",
+                  "value": "1",
+                  "type": "text",
+                  "uuid": "eb24d72c-36c0-4ccf-9ff9-958b22456326"
+                },
+                {
+                  "key": "start",
+                  "value": "0",
+                  "type": "text",
+                  "uuid": "d33cdea6-71db-41e6-abc2-fde6ce8af632"
+                },
+                {
+                  "key": "length",
+                  "value": "1000",
+                  "type": "text",
+                  "uuid": "17b831d0-4672-45c2-bcaf-7cbd4b988cc8"
+                },
+                {
+                  "key": "search[value]",
+                  "value": "",
+                  "type": "text",
+                  "uuid": "76f1cff3-5339-49d7-866f-73f9bf927a4b"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/dashboard/client_by_outstanding",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "dashboard",
+                "client_by_outstanding"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Clients by Outstanding Overdue",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "token",
+                  "value": "e76400cc5a22d09a7a2a306c39f7050221418fc9eb667b6e4ed3e365723146aa",
+                  "type": "text",
+                  "uuid": "0c6d947b-a71b-46b0-824a-5a07f9209573"
+                },
+                {
+                  "key": "employer",
+                  "value": "0",
+                  "description": "0 => All, 1 => PT Valdo International, 2 => PT Valdo Sumber Daya Mandiri, 94 => PT Toko Pandai",
+                  "type": "text",
+                  "uuid": "9455e847-fa47-43a0-9385-5aef9d3d69d5"
+                },
+                {
+                  "key": "product_type",
+                  "value": "0",
+                  "description": "0 => All, 1 => BPO Bundling, 2 => People, 3 => Infra & Technology, 4 => AkuMaju",
+                  "type": "text",
+                  "uuid": "c292969c-5e73-4567-8200-e4afa3c0e5dc"
+                },
+                {
+                  "key": "sourced_to",
+                  "value": "0",
+                  "description": "0 => All",
+                  "type": "text",
+                  "uuid": "23e61605-5a67-4083-a612-5dd84f991af8"
+                },
+                {
+                  "key": "customer_segment",
+                  "value": "0",
+                  "description": "0 => All, 1 => Non BFSI Logistic, 2 => Non BFSI F&B, 3 => BFSI Bank, 4 => Non BFSI Others, 5 => Non BFSI Distribution, 6 => Non BFSI E-commerce, 7 => BFSI Insurance, 8 => BFSI Multi Finance, 9 => BFSI Others",
+                  "type": "text",
+                  "uuid": "ba05f56e-07cd-4011-88f9-3bf6831da577"
+                },
+                {
+                  "key": "project",
+                  "value": "0",
+                  "description": "0 => All",
+                  "type": "text",
+                  "uuid": "7a3ffa8a-c1be-4171-9799-bf710474fff1"
+                },
+                {
+                  "key": "month",
+                  "value": "03",
+                  "description": "\"0\" => All, \"01\" => January, \"02\" => February, \"03\" => March, \"04\" => April, \"05\" => May, \"06\" => June, \"07\" => July, \"08\" => August, \"09\" => September, \"10\" => October, \"11\" => November, \"12\" => December",
+                  "type": "text",
+                  "uuid": "549225fd-06f0-4d87-af6c-0a54464e1e50"
+                },
+                {
+                  "key": "year",
+                  "value": "2026",
+                  "type": "text",
+                  "uuid": "f14e584d-b58e-427e-b8e4-d95fda8b31bb"
+                },
+                {
+                  "key": "draw",
+                  "value": "1",
+                  "type": "text",
+                  "uuid": "eb24d72c-36c0-4ccf-9ff9-958b22456326"
+                },
+                {
+                  "key": "start",
+                  "value": "0",
+                  "type": "text",
+                  "uuid": "d33cdea6-71db-41e6-abc2-fde6ce8af632"
+                },
+                {
+                  "key": "length",
+                  "value": "10",
+                  "type": "text",
+                  "uuid": "17b831d0-4672-45c2-bcaf-7cbd4b988cc8"
+                },
+                {
+                  "key": "search[value]",
+                  "value": "",
+                  "type": "text",
+                  "uuid": "76f1cff3-5339-49d7-866f-73f9bf927a4b"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/dashboard/client_by_overdue",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "dashboard",
+                "client_by_overdue"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Financial Summary",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "token",
+              "value": "e76400cc5a22d09a7a2a306c39f7050221418fc9eb667b6e4ed3e365723146aa",
+              "type": "text",
+              "uuid": "0c6d947b-a71b-46b0-824a-5a07f9209573"
+            },
+            {
+              "key": "employer",
+              "value": "0",
+              "description": "0 => All, 1 => PT Valdo International, 2 => PT Valdo Sumber Daya Mandiri, 94 => PT Toko Pandai",
+              "type": "text",
+              "uuid": "9455e847-fa47-43a0-9385-5aef9d3d69d5"
+            },
+            {
+              "key": "product_type",
+              "value": "0",
+              "description": "0 => All, 1 => BPO Bundling, 2 => People, 3 => Infra & Technology, 4 => AkuMaju",
+              "type": "text",
+              "uuid": "c292969c-5e73-4567-8200-e4afa3c0e5dc"
+            },
+            {
+              "key": "customer_segment",
+              "value": "0",
+              "description": "0 => All, 1 => Non BFSI Logistic, 2 => Non BFSI F&B, 3 => BFSI Bank, 4 => Non BFSI Others, 5 => Non BFSI Distribution, 6 => Non BFSI E-commerce, 7 => BFSI Insurance, 8 => BFSI Multi Finance, 9 => BFSI Others",
+              "type": "text",
+              "uuid": "ba05f56e-07cd-4011-88f9-3bf6831da577"
+            },
+            {
+              "key": "sourced_to",
+              "value": "0",
+              "description": "0 => All",
+              "type": "text",
+              "uuid": "ad407b9d-3046-410c-b727-459ca77dd2d0"
+            },
+            {
+              "key": "project",
+              "value": "0",
+              "description": "0 => All",
+              "type": "text",
+              "uuid": "60e9dc5b-d92c-442f-8925-4a7c4f164371"
+            },
+            {
+              "key": "month",
+              "value": "03",
+              "description": "\"0\" => All, \"01\" => January, \"02\" => February, \"03\" => March, \"04\" => April, \"05\" => May, \"06\" => June, \"07\" => July, \"08\" => August, \"09\" => September, \"10\" => October, \"11\" => November, \"12\" => December",
+              "type": "text",
+              "uuid": "549225fd-06f0-4d87-af6c-0a54464e1e50"
+            },
+            {
+              "key": "year",
+              "value": "2026",
+              "type": "text",
+              "uuid": "f14e584d-b58e-427e-b8e4-d95fda8b31bb"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/api/dashboard/financial_summary",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "dashboard",
+            "financial_summary"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Invoice Trend & Volume",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "token",
+              "value": "e76400cc5a22d09a7a2a306c39f7050221418fc9eb667b6e4ed3e365723146aa",
+              "type": "text",
+              "uuid": "0c6d947b-a71b-46b0-824a-5a07f9209573"
+            },
+            {
+              "key": "start_period",
+              "value": "10-2025",
+              "description": "\"0\" => All, \"01\" => January, \"02\" => February, \"03\" => March, \"04\" => April, \"05\" => May, \"06\" => June, \"07\" => July, \"08\" => August, \"09\" => September, \"10\" => October, \"11\" => November, \"12\" => December",
+              "type": "text",
+              "uuid": "549225fd-06f0-4d87-af6c-0a54464e1e50"
+            },
+            {
+              "key": "end_period",
+              "value": "04-2026",
+              "type": "text",
+              "uuid": "f14e584d-b58e-427e-b8e4-d95fda8b31bb"
+            },
+            {
+              "key": "employer",
+              "value": "0",
+              "description": "0 => All, 1 => PT Valdo International, 2 => PT Valdo Sumber Daya Mandiri, 94 => PT Toko Pandai",
+              "type": "text",
+              "uuid": "0e96b099-5a0f-4c4e-ae8b-b8bace9b5a49"
+            },
+            {
+              "key": "product_type",
+              "value": "0",
+              "description": "0 => All, 1 => BPO Bundling, 2 => People, 3 => Infra & Technology, 4 => AkuMaju",
+              "type": "text",
+              "uuid": "fc438de7-66fa-427a-8cd6-23738af1115f"
+            },
+            {
+              "key": "customer_segment",
+              "value": "0",
+              "description": "0 => All, 1 => Non BFSI Logistic, 2 => Non BFSI F&B, 3 => BFSI Bank, 4 => Non BFSI Others, 5 => Non BFSI Distribution, 6 => Non BFSI E-commerce, 7 => BFSI Insurance, 8 => BFSI Multi Finance, 9 => BFSI Others",
+              "type": "text",
+              "uuid": "520c4acc-4a0e-475f-9a1e-57640ffc3442"
+            },
+            {
+              "key": "sourced_to",
+              "value": "0",
+              "description": "0 => All",
+              "type": "text",
+              "uuid": "3d102491-cf67-4a48-8dca-ac70c1dfe4f2"
+            },
+            {
+              "key": "project",
+              "value": "0",
+              "description": "0 => All",
+              "type": "text",
+              "uuid": "c9453ab6-02fe-45dd-8335-c5ecba42be6c"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/api/dashboard/invoice_trend",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "dashboard",
+            "invoice_trend"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Payment Performance",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "token",
+              "value": "e76400cc5a22d09a7a2a306c39f7050221418fc9eb667b6e4ed3e365723146aa",
+              "type": "text",
+              "uuid": "0c6d947b-a71b-46b0-824a-5a07f9209573"
+            },
+            {
+              "key": "employer",
+              "value": "0",
+              "description": "0 => All, 1 => PT Valdo International, 2 => PT Valdo Sumber Daya Mandiri, 94 => PT Toko Pandai",
+              "type": "text",
+              "uuid": "9455e847-fa47-43a0-9385-5aef9d3d69d5"
+            },
+            {
+              "key": "product_type",
+              "value": "0",
+              "description": "0 => All, 1 => BPO Bundling, 2 => People, 3 => Infra & Technology, 4 => AkuMaju",
+              "type": "text",
+              "uuid": "c292969c-5e73-4567-8200-e4afa3c0e5dc"
+            },
+            {
+              "key": "customer_segment",
+              "value": "0",
+              "description": "0 => All, 1 => Non BFSI Logistic, 2 => Non BFSI F&B, 3 => BFSI Bank, 4 => Non BFSI Others, 5 => Non BFSI Distribution, 6 => Non BFSI E-commerce, 7 => BFSI Insurance, 8 => BFSI Multi Finance, 9 => BFSI Others",
+              "type": "text",
+              "uuid": "ba05f56e-07cd-4011-88f9-3bf6831da577"
+            },
+            {
+              "key": "sourced_to",
+              "value": "0",
+              "description": "0 => All",
+              "type": "text",
+              "uuid": "34fec333-9e62-4574-a8be-78ac78961893"
+            },
+            {
+              "key": "project",
+              "value": "0",
+              "description": "0 => All",
+              "type": "text",
+              "uuid": "ee30f60b-8539-44ba-9611-6a66d4d11965"
+            },
+            {
+              "key": "month",
+              "value": "03",
+              "description": "\"0\" => All, \"01\" => January, \"02\" => February, \"03\" => March, \"04\" => April, \"05\" => May, \"06\" => June, \"07\" => July, \"08\" => August, \"09\" => September, \"10\" => October, \"11\" => November, \"12\" => December",
+              "type": "text",
+              "uuid": "549225fd-06f0-4d87-af6c-0a54464e1e50"
+            },
+            {
+              "key": "year",
+              "value": "2026",
+              "type": "text",
+              "uuid": "f14e584d-b58e-427e-b8e4-d95fda8b31bb"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/api/dashboard/payment_performance",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "dashboard",
+            "payment_performance"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "AR Management",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "token",
+              "value": "e76400cc5a22d09a7a2a306c39f7050221418fc9eb667b6e4ed3e365723146aa",
+              "type": "text",
+              "uuid": "0c6d947b-a71b-46b0-824a-5a07f9209573"
+            },
+            {
+              "key": "employer",
+              "value": "0",
+              "description": "0 => All, 1 => PT Valdo International, 2 => PT Valdo Sumber Daya Mandiri, 94 => PT Toko Pandai",
+              "type": "text",
+              "uuid": "9455e847-fa47-43a0-9385-5aef9d3d69d5"
+            },
+            {
+              "key": "product_type",
+              "value": "0",
+              "description": "0 => All, 1 => BPO Bundling, 2 => People, 3 => Infra & Technology, 4 => AkuMaju",
+              "type": "text",
+              "uuid": "c292969c-5e73-4567-8200-e4afa3c0e5dc"
+            },
+            {
+              "key": "customer_segment",
+              "value": "0",
+              "description": "0 => All, 1 => Non BFSI Logistic, 2 => Non BFSI F&B, 3 => BFSI Bank, 4 => Non BFSI Others, 5 => Non BFSI Distribution, 6 => Non BFSI E-commerce, 7 => BFSI Insurance, 8 => BFSI Multi Finance, 9 => BFSI Others",
+              "type": "text",
+              "uuid": "ba05f56e-07cd-4011-88f9-3bf6831da577"
+            },
+            {
+              "key": "sourced_to",
+              "value": "0",
+              "description": "0 => All",
+              "type": "text",
+              "uuid": "bbd0259b-9019-46da-92bb-6459118681e2"
+            },
+            {
+              "key": "project",
+              "value": "0",
+              "description": "0 => All",
+              "type": "text",
+              "uuid": "5146272f-c739-4205-8295-ca7f60e9fb3f"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/api/dashboard/ar_management",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "dashboard",
+            "ar_management"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}
