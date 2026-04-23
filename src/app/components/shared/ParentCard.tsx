@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext } from "react";
+import React, { type ReactNode, useContext } from "react";
 import { useTheme } from "@mui/material/styles";
 import { Card, CardHeader, CardContent, Divider, Box } from "@mui/material";
 import { CustomizerContext } from '@/app/context/customizerContext';
@@ -7,9 +7,9 @@ import { CustomizerContext } from '@/app/context/customizerContext';
 
 type Props = {
   title: string;
-  footer?: string | JSX.Element;
-  codeModel?: JSX.Element | JSX.Element[];
-  children: JSX.Element;
+  footer?: string | ReactNode;
+  codeModel?: ReactNode;
+  children: ReactNode;
 };
 
 const ParentCard = ({ title, children, footer, codeModel }: Props) => {

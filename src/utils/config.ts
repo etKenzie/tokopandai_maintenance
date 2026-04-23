@@ -11,14 +11,14 @@ export const config = {
  * This function ensures the environment variable is loaded and provides helpful error messages
  */
 export function getApiUrl(): string {
-  const apiUrl = process.env.NEXT_PUBLIC_AM_API_URL;
+  const apiUrl = process.env.NEXT_PUBLIC_AM_API_URL ?? process.env.NEXT_PUBLIC_VISIT_URL;
   const isDevelopment = process.env.NODE_ENV === 'development';
   const isClient = typeof window !== 'undefined';
   
   // Log environment info for debugging
   if (!apiUrl) {
     const context = isClient ? '[CLIENT]' : '[SERVER]';
-    console.error(`❌ ${context} NEXT_PUBLIC_AM_API_URL is not set!`);
+    console.error(`❌ ${context} NEXT_PUBLIC_AM_API_URL/NEXT_PUBLIC_VISIT_URL is not set!`);
     console.error(`${context} Environment check:`, {
       nodeEnv: process.env.NODE_ENV,
       hasEnvVar: !!apiUrl,
@@ -31,10 +31,11 @@ export function getApiUrl(): string {
     });
     
     const errorMessage = 
-      'NEXT_PUBLIC_AM_API_URL environment variable is not set.\n\n' +
+      'NEXT_PUBLIC_AM_API_URL or NEXT_PUBLIC_VISIT_URL environment variable is not set.\n\n' +
       'Local Development:\n' +
       '  - Create a .env.local file in the project root\n' +
-      '  - Add: NEXT_PUBLIC_AM_API_URL=https://your-api-url.com\n\n' +
+      '  - Add: NEXT_PUBLIC_AM_API_URL=https://your-api-url.com\n' +
+      '    or NEXT_PUBLIC_VISIT_URL=https://your-api-url.com\n\n' +
       'Production:\n' +
       '  - Set the environment variable in your hosting platform:\n' +
       '    • Vercel: Project Settings → Environment Variables\n' +

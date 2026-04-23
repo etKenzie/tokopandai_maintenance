@@ -1,6 +1,8 @@
+import type { ReactNode } from "react";
+
 type Props = {
   description?: string;
-  children: JSX.Element | JSX.Element[];
+  children: ReactNode;
   title?: string;
 };
 

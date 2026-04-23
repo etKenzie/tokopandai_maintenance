@@ -2,18 +2,18 @@
 import { useTheme } from '@mui/material/styles';
 import { Card, CardContent, Typography, Stack, Box, SxProps, Theme } from '@mui/material';
 import { CustomizerContext } from '@/app/context/customizerContext';
-import { useContext } from 'react';
+import { type ReactNode, useContext } from 'react';
 
 type Props = {
   title?: string;
   subtitle?: string;
-  action?: JSX.Element | any;
-  footer?: JSX.Element;
-  cardheading?: string | JSX.Element;
-  headtitle?: string | JSX.Element;
-  headsubtitle?: string | JSX.Element;
-  children?: JSX.Element;
-  middlecontent?: string | JSX.Element;
+  action?: ReactNode;
+  footer?: ReactNode;
+  cardheading?: string | ReactNode;
+  headtitle?: string | ReactNode;
+  headsubtitle?: string | ReactNode;
+  children?: ReactNode;
+  middlecontent?: string | ReactNode;
   /** Merged into the root `Card` `sx` (e.g. flex stretch in grid rows). */
   cardSx?: SxProps<Theme>;
   /** Merged into `CardContent` `sx` when `cardheading` is not used. */

@@ -1,13 +1,15 @@
+import type { ReactNode } from "react";
+
 export interface registerType {
   title?: string;
-  subtitle?: JSX.Element | JSX.Element[];
-  subtext?: JSX.Element | JSX.Element[];
+  subtitle?: ReactNode;
+  subtext?: ReactNode;
 }
 
 export interface loginType {
   title?: string;
-  subtitle?: JSX.Element | JSX.Element[];
-  subtext?: JSX.Element | JSX.Element[];
+  subtitle?: ReactNode;
+  subtext?: ReactNode;
 }
 
 export interface signInType {
