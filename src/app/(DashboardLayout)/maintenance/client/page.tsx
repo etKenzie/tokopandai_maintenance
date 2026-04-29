@@ -24,6 +24,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { getCookie } from "cookies-next";
 import React, { useCallback, useEffect, useState } from "react";
+import { logMaintenanceFetch } from "@/app/api/maintenance/requestLog";
 
 interface MaintenanceClient {
   id: number;
@@ -49,7 +50,7 @@ export default function MaintenanceClientPage() {
     setLoading(true);
     try {
       const token = getCookie("token");
-      const res = await fetch("/api/maintenance/client", {
+      const res = await logMaintenanceFetch("/api/maintenance/client", {
         method: "GET",
         credentials: "include",
         headers: token ? { Authorization: `Bearer ${token}` } : {},
@@ -118,7 +119,7 @@ export default function MaintenanceClientPage() {
                           if (!window.confirm(`Delete client "${client.client_name}"?`)) return;
                           try {
                             const token = getCookie("token");
-                            const res = await fetch(`/api/maintenance/client/${client.id}`, {
+                            const res = await logMaintenanceFetch(`/api/maintenance/client/${client.id}`, {
                               method: "DELETE",
                               credentials: "include",
                               headers: token ? { Authorization: `Bearer ${token}` } : {},
@@ -151,7 +152,7 @@ export default function MaintenanceClientPage() {
             setSaving(true);
             try {
               const token = getCookie("token");
-              const res = await fetch("/api/maintenance/client", {
+              const res = await logMaintenanceFetch("/api/maintenance/client", {
                 method: "POST",
                 credentials: "include",
                 headers: {
@@ -203,7 +204,7 @@ export default function MaintenanceClientPage() {
             setSaving(true);
             try {
               const token = getCookie("token");
-              const res = await fetch(`/api/maintenance/client/${selectedClient.id}`, {
+              const res = await logMaintenanceFetch(`/api/maintenance/client/${selectedClient.id}`, {
                 method: "PUT",
                 credentials: "include",
                 headers: {

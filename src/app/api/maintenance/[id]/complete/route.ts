@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { logMaintenanceFetch } from "@/app/api/maintenance/requestLog";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -22,7 +23,7 @@ export async function PATCH(
     if (token) headers["Authorization"] = `Bearer ${token}`;
 
     const url = `${baseUrl}/maintenance/${id}/complete`;
-    const res = await fetch(url, { method: "PATCH", headers });
+    const res = await logMaintenanceFetch(url, { method: "PATCH", headers });
     if (!res.ok) {
       return NextResponse.json(
         { error: "Failed to complete maintenance", details: await res.text() },

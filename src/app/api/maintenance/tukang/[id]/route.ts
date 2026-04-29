@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { logMaintenanceFetch } from "@/app/api/maintenance/requestLog";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -23,7 +24,7 @@ export async function PUT(
     const headers: HeadersInit = { "Content-Type": "application/json" };
     if (token) headers["Authorization"] = `Bearer ${token}`;
 
-    const res = await fetch(`${baseUrl}/maintenance/tukang/${id}`, {
+    const res = await logMaintenanceFetch(`${baseUrl}/maintenance/tukang/${id}`, {
       method: "PUT",
       headers,
       body: JSON.stringify({
@@ -62,7 +63,7 @@ export async function DELETE(
     const headers: HeadersInit = { "Content-Type": "application/json" };
     if (token) headers["Authorization"] = `Bearer ${token}`;
 
-    const res = await fetch(`${baseUrl}/maintenance/tukang/${id}`, {
+    const res = await logMaintenanceFetch(`${baseUrl}/maintenance/tukang/${id}`, {
       method: "DELETE",
       headers,
     });

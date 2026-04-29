@@ -42,6 +42,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useAuth } from "@/app/context/AuthContext";
+import { logMaintenanceFetch } from "@/app/api/maintenance/requestLog";
 
 moment.locale("en-GB");
 const localizer = momentLocalizer(moment);
@@ -332,7 +333,7 @@ export default function MaintenancePage() {
     setLoading(true);
     try {
       const token = getCookie("token");
-      const res = await fetch("/api/maintenance", {
+      const res = await logMaintenanceFetch("/api/maintenance", {
         method: "GET",
         credentials: "include",
         headers: token ? { Authorization: `Bearer ${token}` } : {},
@@ -356,7 +357,7 @@ export default function MaintenancePage() {
     const fetchClients = async () => {
       try {
         const token = getCookie("token");
-        const res = await fetch("/api/maintenance/client", {
+        const res = await logMaintenanceFetch("/api/maintenance/client", {
           method: "GET",
           credentials: "include",
           headers: token ? { Authorization: `Bearer ${token}` } : {},
@@ -382,7 +383,7 @@ export default function MaintenancePage() {
     const fetchTukang = async () => {
       try {
         const token = getCookie("token");
-        const res = await fetch("/api/maintenance/tukang", {
+        const res = await logMaintenanceFetch("/api/maintenance/tukang", {
           method: "GET",
           credentials: "include",
           headers: token ? { Authorization: `Bearer ${token}` } : {},
@@ -434,7 +435,7 @@ export default function MaintenancePage() {
         img_maintenance: editForm.img_maintenance || undefined,
         request_time: editForm.request_time.toISOString().replace(/\.\d{3}Z$/, "Z"),
       };
-      const res = await fetch(`/api/maintenance/${selectedMaintenance.id}`, {
+      const res = await logMaintenanceFetch(`/api/maintenance/${selectedMaintenance.id}`, {
         method: "PUT",
         credentials: "include",
         headers: {
@@ -471,7 +472,7 @@ export default function MaintenancePage() {
     setDeletingMaintenance(true);
     try {
       const token = getCookie("token");
-      const res = await fetch(`/api/maintenance/${selectedMaintenance.id}`, {
+      const res = await logMaintenanceFetch(`/api/maintenance/${selectedMaintenance.id}`, {
         method: "DELETE",
         credentials: "include",
         headers: token ? { Authorization: `Bearer ${token}` } : {},
@@ -500,7 +501,7 @@ export default function MaintenancePage() {
     setApprovingMaintenance(true);
     try {
       const token = getCookie("token");
-      const res = await fetch(`/api/maintenance/${selectedMaintenance.id}/approve`, {
+      const res = await logMaintenanceFetch(`/api/maintenance/${selectedMaintenance.id}/approve`, {
         method: "PATCH",
         credentials: "include",
         headers: {
@@ -535,7 +536,7 @@ export default function MaintenancePage() {
     setCompletingMaintenance(true);
     try {
       const token = getCookie("token");
-      const res = await fetch(`/api/maintenance/${selectedMaintenance.id}/complete`, {
+      const res = await logMaintenanceFetch(`/api/maintenance/${selectedMaintenance.id}/complete`, {
         method: "PATCH",
         credentials: "include",
         headers: token ? { Authorization: `Bearer ${token}` } : {},
@@ -593,7 +594,7 @@ export default function MaintenancePage() {
           img_maintenance: form.img_maintenance || undefined,
           request_time: form.request_time.toISOString().replace(/\.\d{3}Z$/, "Z"),
         };
-        const res = await fetch("/api/maintenance", {
+        const res = await logMaintenanceFetch("/api/maintenance", {
           method: "POST",
           credentials: "include",
           headers,
@@ -615,7 +616,7 @@ export default function MaintenancePage() {
             img_maintenance: form.img_maintenance || undefined,
             request_time: scheduledDates[i].toISOString().replace(/\.\d{3}Z$/, "Z"),
           };
-          const res = await fetch("/api/maintenance", {
+          const res = await logMaintenanceFetch("/api/maintenance", {
             method: "POST",
             credentials: "include",
             headers,
@@ -880,7 +881,7 @@ export default function MaintenancePage() {
                     try {
                       const fd = new FormData();
                       fd.append("file", file);
-                      const res = await fetch("/api/upload", { method: "POST", body: fd });
+                      const res = await logMaintenanceFetch("/api/upload", { method: "POST", body: fd });
                       if (!res.ok) {
                         const err = await res.json().catch(() => ({}));
                         throw new Error(err?.error || "Upload failed");
@@ -1101,7 +1102,7 @@ export default function MaintenancePage() {
                         try {
                           const fd = new FormData();
                           fd.append("file", file);
-                          const res = await fetch("/api/upload", { method: "POST", body: fd });
+                          const res = await logMaintenanceFetch("/api/upload", { method: "POST", body: fd });
                           if (!res.ok) {
                             const err = await res.json().catch(() => ({}));
                             throw new Error(err?.error || "Upload failed");

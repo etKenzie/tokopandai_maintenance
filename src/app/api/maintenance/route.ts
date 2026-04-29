@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { logMaintenanceFetch } from "@/app/api/maintenance/requestLog";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -6,11 +7,6 @@ export const runtime = "nodejs";
 const getToken = (request: NextRequest) => {
   const authHeader = request.headers.get("authorization");
   return authHeader?.replace("Bearer ", "") || request.cookies.get("token")?.value;
-};
-
-const logProxyResponse = async (label: string, method: string, url: string, res: Response) => {
-  const bodyText = await res.clone().text();
-  console.log(`[maintenance proxy] ${label} ${method} ${url} -> ${res.status}`, bodyText);
 };
 
 export async function GET(request: NextRequest) {
@@ -26,8 +22,7 @@ export async function GET(request: NextRequest) {
     const headers: HeadersInit = { "Content-Type": "application/json" };
     if (token) headers["Authorization"] = `Bearer ${token}`;
 
-    const res = await fetch(url, { method: "GET", headers });
-    await logProxyResponse("GET", "GET", url, res);
+    const res = await logMaintenanceFetch(url, { method: "GET", headers });
     if (!res.ok) return NextResponse.json({ error: "Failed to fetch maintenance", details: await res.text() }, { status: res.status });
     return NextResponse.json(await res.json());
   } catch (error) {
@@ -46,8 +41,7 @@ export async function POST(request: NextRequest) {
     if (token) headers["Authorization"] = `Bearer ${token}`;
 
     const url = `${baseUrl}/maintenance`;
-    const res = await fetch(url, { method: "POST", headers, body: JSON.stringify(payload) });
-    await logProxyResponse("POST", "POST", url, res);
+    const res = await logMaintenanceFetch(url, { method: "POST", headers, body: JSON.stringify(payload) });
     if (!res.ok) {
       return NextResponse.json({ error: "Failed to create maintenance request", details: await res.text() }, { status: res.status });
     }

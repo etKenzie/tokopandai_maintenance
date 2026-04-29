@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { logMaintenanceFetch } from "@/app/api/maintenance/requestLog";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -16,7 +17,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     const headers: HeadersInit = { "Content-Type": "application/json" };
     const token = getToken(request);
     if (token) headers["Authorization"] = `Bearer ${token}`;
-    const res = await fetch(`${baseUrl}/maintenance/${id}`, { method: "GET", headers });
+    const res = await logMaintenanceFetch(`${baseUrl}/maintenance/${id}`, { method: "GET", headers });
     if (!res.ok) return NextResponse.json({ error: "Failed to fetch maintenance", details: await res.text() }, { status: res.status });
     return NextResponse.json(await res.json());
   } catch (error) {
@@ -33,7 +34,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     const token = getToken(request);
     if (token) headers["Authorization"] = `Bearer ${token}`;
     const body = await request.json();
-    const res = await fetch(`${baseUrl}/maintenance/${id}`, { method: "PUT", headers, body: JSON.stringify(body) });
+    const res = await logMaintenanceFetch(`${baseUrl}/maintenance/${id}`, { method: "PUT", headers, body: JSON.stringify(body) });
     if (!res.ok) return NextResponse.json({ error: "Failed to update maintenance", details: await res.text() }, { status: res.status });
     return NextResponse.json(await res.json());
   } catch (error) {
@@ -49,7 +50,7 @@ export async function DELETE(request: NextRequest, { params }: { params: Promise
     const headers: HeadersInit = { "Content-Type": "application/json" };
     const token = getToken(request);
     if (token) headers["Authorization"] = `Bearer ${token}`;
-    const res = await fetch(`${baseUrl}/maintenance/${id}`, { method: "DELETE", headers });
+    const res = await logMaintenanceFetch(`${baseUrl}/maintenance/${id}`, { method: "DELETE", headers });
     if (!res.ok) return NextResponse.json({ error: "Failed to delete maintenance", details: await res.text() }, { status: res.status });
     return NextResponse.json(await res.json().catch(() => ({})));
   } catch (error) {

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { logMaintenanceFetch } from "@/app/api/maintenance/requestLog";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -19,7 +20,7 @@ export async function GET(request: NextRequest) {
     const headers: HeadersInit = { "Content-Type": "application/json" };
     if (token) headers["Authorization"] = `Bearer ${token}`;
 
-    const res = await fetch(`${baseUrl}/maintenance/tukang`, { method: "GET", headers });
+    const res = await logMaintenanceFetch(`${baseUrl}/maintenance/tukang`, { method: "GET", headers });
     if (!res.ok) {
       const text = await res.text();
       return NextResponse.json({ error: "Failed to fetch tukang", details: text }, { status: res.status });
@@ -46,7 +47,7 @@ export async function POST(request: NextRequest) {
     const headers: HeadersInit = { "Content-Type": "application/json" };
     if (token) headers["Authorization"] = `Bearer ${token}`;
 
-    const res = await fetch(`${baseUrl}/maintenance/tukang`, {
+    const res = await logMaintenanceFetch(`${baseUrl}/maintenance/tukang`, {
       method: "POST",
       headers,
       body: JSON.stringify({

@@ -24,6 +24,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { getCookie } from "cookies-next";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { logMaintenanceFetch } from "@/app/api/maintenance/requestLog";
 
 interface Tukang {
   id: number;
@@ -76,7 +77,7 @@ export default function MaintenanceTukangPage() {
     setLoading(true);
     try {
       const token = getCookie("token");
-      const res = await fetch("/api/maintenance/tukang", {
+      const res = await logMaintenanceFetch("/api/maintenance/tukang", {
         method: "GET",
         credentials: "include",
         headers: token ? { Authorization: `Bearer ${token}` } : {},
@@ -131,7 +132,7 @@ export default function MaintenanceTukangPage() {
       const endpoint = isEdit ? `/api/maintenance/tukang/${selectedTukang?.id}` : "/api/maintenance/tukang";
       const method = isEdit ? "PUT" : "POST";
 
-      const res = await fetch(endpoint, {
+      const res = await logMaintenanceFetch(endpoint, {
         method,
         credentials: "include",
         headers: {
@@ -159,7 +160,7 @@ export default function MaintenanceTukangPage() {
     if (!window.confirm(`Delete tukang "${item.tukang_name}"?`)) return;
     try {
       const token = getCookie("token");
-      const res = await fetch(`/api/maintenance/tukang/${item.id}`, {
+      const res = await logMaintenanceFetch(`/api/maintenance/tukang/${item.id}`, {
         method: "DELETE",
         credentials: "include",
         headers: token ? { Authorization: `Bearer ${token}` } : {},

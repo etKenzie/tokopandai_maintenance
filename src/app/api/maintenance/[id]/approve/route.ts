@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { logMaintenanceFetch } from "@/app/api/maintenance/requestLog";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -23,7 +24,7 @@ export async function PATCH(
     if (token) headers["Authorization"] = `Bearer ${token}`;
 
     const url = `${baseUrl}/maintenance/${id}/approve`;
-    const res = await fetch(url, {
+    const res = await logMaintenanceFetch(url, {
       method: "PATCH",
       headers,
       body: JSON.stringify({ tukang_id: body?.tukang_id }),
