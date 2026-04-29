@@ -93,11 +93,11 @@ export const COLLECTION_API_TOKEN = getCollectionApiToken();
 // Log API URL at module load (only once, helps with debugging)
 if (typeof window === 'undefined') {
   // Server-side: log once
-  console.log('[SERVER] 🚀 AM API URL initialized:', AM_API_URL);
+  console.log('[SERVER] 🚀 NEXT_PUBLIC_API_URL initialized:', AM_API_URL);
 } else {
   // Client-side: log once on first load
   if (!(window as any).__API_URL_LOGGED__) {
-    console.log('[CLIENT] 🚀 AM API URL initialized:', AM_API_URL);
+    console.log('[CLIENT] 🚀 NEXT_PUBLIC_API_URL initialized:', AM_API_URL);
     (window as any).__API_URL_LOGGED__ = true;
   }
 } 
