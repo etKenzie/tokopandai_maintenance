@@ -19,8 +19,8 @@ export function logApiConfig() {
   console.log('AM_API_URL constant:', AM_API_URL);
   console.log('Environment:', {
     NODE_ENV: process.env.NODE_ENV,
-    hasNextPublicAmApiUrl: !!process.env.NEXT_PUBLIC_AM_API_URL,
-    rawValue: process.env.NEXT_PUBLIC_AM_API_URL || '(not set)',
+    hasNextPublicApiUrl: !!process.env.NEXT_PUBLIC_API_URL,
+    nextPublicApiUrl: process.env.NEXT_PUBLIC_API_URL || '(not set)',
   });
   
   if (isClient) {
