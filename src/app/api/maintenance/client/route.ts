@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { logMaintenanceFetch } from "@/app/api/maintenance/requestLog";
+import { getMaintenanceUpstreamBaseUrl } from "@/app/api/maintenance/upstreamBase";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -11,7 +12,7 @@ const getToken = (request: NextRequest) => {
 
 export async function GET(request: NextRequest) {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_VISIT_URL || "";
+    const baseUrl = getMaintenanceUpstreamBaseUrl();
     if (!baseUrl) {
       return NextResponse.json({ error: "API URL not configured" }, { status: 500 });
     }
@@ -38,7 +39,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_VISIT_URL || "";
+    const baseUrl = getMaintenanceUpstreamBaseUrl();
     if (!baseUrl) {
       return NextResponse.json({ error: "API URL not configured" }, { status: 500 });
     }
