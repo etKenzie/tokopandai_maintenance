@@ -31,10 +31,25 @@ export async function logMaintenanceFetch(url: string, init?: RequestInit): Prom
   try {
     res = await fetch(url, init);
   } catch (error) {
+    const err = error instanceof Error ? error : new Error(String(error));
+    const cause = (err as Error & { cause?: unknown }).cause;
+    const causePayload =
+      cause instanceof Error
+        ? {
+            name: cause.name,
+            message: cause.message,
+            ...("code" in cause && typeof (cause as NodeJS.ErrnoException).code === "string"
+              ? { code: (cause as NodeJS.ErrnoException).code }
+              : {}),
+          }
+        : cause !== undefined
+          ? { raw: String(cause) }
+          : undefined;
     console.error("[maintenance][network-error]", {
       method,
       url,
-      error: error instanceof Error ? error.message : String(error),
+      error: err.message,
+      ...(causePayload ? { cause: causePayload } : {}),
     });
     throw error;
   }

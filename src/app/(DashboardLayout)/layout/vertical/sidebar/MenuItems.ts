@@ -1,12 +1,11 @@
 import {
-  IconHome,
-  IconTool,
-  IconUsers,
-  IconUserCog,
-  // IconPaywall,
+    IconHome,
+    IconList,
+    IconTool,
+    IconUserCog,
+    IconUsers,
 } from "@tabler/icons-react";
 import { uniqueId } from "lodash";
-import { ROLES } from "@/config/roles";
 
 interface MenuitemsType {
   [x: string]: any;
@@ -105,6 +104,22 @@ const Menuitems: MenuitemsType[] = [
     title: "Tukang",
     icon: IconUserCog,
     href: "/maintenance/tukang",
+  },
+  {
+    navlabel: true,
+    subheader: "Invoice",
+  },
+  {
+    id: uniqueId(),
+    title: "List",
+    icon: IconList,
+    href: "/invoice/list",
+  },
+  {
+    id: uniqueId(),
+    title: "Cash pickup",
+    icon: IconTool,
+    href: "/invoice/cash-pickup",
   },
   // {
   //   navlabel: true,

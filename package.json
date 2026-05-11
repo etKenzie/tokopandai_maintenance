@@ -21,10 +21,12 @@
     "@mui/system": "^7.0.1",
     "@mui/x-date-pickers": "7.18.0",
     "@react-google-maps/api": "^2.20.8",
+    "@supabase/supabase-js": "^2.56.0",
     "@tabler/icons-react": "^2.39.0",
     "apexcharts": "3.43.0",
     "chance": "^1.1.11",
     "cookies-next": "^4.3.0",
+    "jspdf": "^2.5.2",
     "date-fns": "^2.30.0",
     "emoji-picker-react": "^4.5.2",
     "i18next": "^23.5.1",
@@ -45,7 +47,6 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
-    "@supabase/supabase-js": "^2.56.0",
     "@types/chance": "^1.1.4",
     "@types/google.maps": "^3.55.3",
     "@types/lodash": "^4.14.199",
