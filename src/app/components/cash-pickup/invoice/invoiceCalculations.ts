@@ -33,11 +33,20 @@ function roscikRatePerPickup(pickupCount: number): number {
   return 40_000;
 }
 
+/**
+ * Align API slugs with invoice rules (`janji_jiwa`, etc.). Backend may use hyphens or no separator.
+ */
+export function normalizeCashPickupSlug(raw: string): string {
+  let s = raw.trim().toLowerCase().replace(/-/g, "_");
+  if (s === "janjijiwa") s = "janji_jiwa";
+  return s;
+}
+
 export function buildInvoiceTableAndTotal(
   companySlug: string,
   invoices: PickupInvoiceLine[]
 ): { tableData: InvoiceTableData; totalAmount: number } {
-  const slug = companySlug.toLowerCase();
+  const slug = normalizeCashPickupSlug(companySlug);
 
   if (slug === "janji_jiwa") {
     const geraiMap = new Map<
@@ -75,7 +84,7 @@ export function buildInvoiceTableAndTotal(
 
     return {
       tableData: {
-        headers: ["Kode Gerai", "Nama Gerai", "Pickup Total", "Total Amount"],
+        headers: ["Kode Gerai", "Nama Gerai", "Total Pickup (IDR)", "Fee Pickup"],
         rows,
       },
       totalAmount,
@@ -212,7 +221,7 @@ export function buildInvoiceTableAndTotal(
 
     return {
       tableData: {
-        headers: ["Kode Gerai", "Nama Gerai", "Total Invoice", "Fee Given"],
+        headers: ["Kode Gerai", "Nama Gerai", "Total Pickup (IDR)", "Fee Pickup"],
         rows,
       },
       totalAmount,

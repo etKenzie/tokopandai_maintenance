@@ -1,3 +1,4 @@
+import { normalizeCashPickupSlug } from "../invoiceCalculations";
 import { DarmiPDFGenerator } from "./generators/DarmiPDFGenerator";
 import { DefaultPDFGenerator } from "./generators/DefaultPDFGenerator";
 import { HangryPDFGenerator } from "./generators/HangryPDFGenerator";
@@ -7,7 +8,7 @@ import { PDFGenerator, PDFGeneratorFactory } from "./types/InvoicePDFTypes";
 
 export class InvoicePDFGeneratorFactory implements PDFGeneratorFactory {
   createGenerator(companySlug: string): PDFGenerator {
-    switch (companySlug.toLowerCase()) {
+    switch (normalizeCashPickupSlug(companySlug)) {
       case 'mbok_darmi':
         return new DarmiPDFGenerator();
       case 'hangry':
