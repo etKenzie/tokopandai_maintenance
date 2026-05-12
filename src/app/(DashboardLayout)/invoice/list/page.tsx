@@ -2,6 +2,7 @@
 
 import PageContainer from "@/app/components/container/PageContainer";
 import BlankCard from "@/app/components/shared/BlankCard";
+import InvoiceClientTotalsChart from "@/app/components/cash-pickup/invoice/InvoiceClientTotalsChart";
 import { pdfService } from "@/app/components/cash-pickup/invoice/pdf/PDFService";
 import { logMaintenanceFetch } from "@/app/api/maintenance/requestLog";
 import type { Company } from "@/app/components/cash-pickup/invoice/pdf/types/InvoicePDFTypes";
@@ -112,6 +113,64 @@ function buildTableDataForPatch(headers: string[], rows: string[][]) {
   return { headers: h, rows: r };
 }
 
+const CHART_FETCH_LIMIT = 100;
+const CHART_MAX_PAGES = 300;
+
+/** Paginates through invoices for the period and sums `total_amount_rupiah` per client. */
+async function fetchTotalsByClientForPeriod(
+  periodStart: string,
+  periodEnd: string,
+  companySlug: string
+): Promise<{ label: string; total: number }[]> {
+  const token = getCookie("token");
+  const headers: HeadersInit = token ? { Authorization: `Bearer ${String(token)}` } : {};
+  const slug = companySlug.trim();
+  const totals = new Map<string, { label: string; total: number }>();
+  let pageNum = 1;
+
+  while (pageNum <= CHART_MAX_PAGES) {
+    const qs = new URLSearchParams({
+      period_start: periodStart,
+      period_end: periodEnd,
+      page: String(pageNum),
+      limit: String(CHART_FETCH_LIMIT),
+    });
+    if (slug) qs.set("company_slug", slug);
+
+    const res = await logMaintenanceFetch(`/api/invoices?${qs.toString()}`, {
+      method: "GET",
+      credentials: "include",
+      headers,
+    });
+    const json = (await res.json()) as StoredInvoicesListResponse & { error?: string; message?: string };
+    if (!res.ok || json.status !== "success" || !Array.isArray(json.data)) {
+      break;
+    }
+    const batch = json.data;
+    if (batch.length === 0) break;
+
+    for (const row of batch) {
+      const key = row.company_slug || row.company_name;
+      const amt = Number(row.total_amount_rupiah);
+      const safeAmt = Number.isFinite(amt) ? amt : 0;
+      const label = (row.company_name || key).trim() || key;
+      const prev = totals.get(key);
+      if (prev) {
+        prev.total += safeAmt;
+      } else {
+        totals.set(key, { label, total: safeAmt });
+      }
+    }
+
+    const totalPages = json.metadata?.totalPages;
+    if (typeof totalPages === "number" && totalPages > 0 && pageNum >= totalPages) break;
+    if (batch.length < CHART_FETCH_LIMIT) break;
+    pageNum += 1;
+  }
+
+  return [...totals.values()].sort((a, b) => b.total - a.total);
+}
+
 export default function InvoiceListPage() {
   /** Optional; empty string = all clients (omit `company_slug` on list GET). */
   const [clientSlug, setClientSlug] = useState("");
@@ -144,6 +203,9 @@ export default function InvoiceListPage() {
   const [editError, setEditError] = useState<string | null>(null);
 
   const [snack, setSnack] = useState({ open: false, message: "", severity: "success" as "success" | "error" });
+
+  const [chartPoints, setChartPoints] = useState<{ label: string; total: number }[]>([]);
+  const [chartLoading, setChartLoading] = useState(false);
 
   const loadClients = useCallback(async () => {
     setClientsLoading(true);
@@ -211,6 +273,25 @@ export default function InvoiceListPage() {
   useEffect(() => {
     void fetchInvoices();
   }, [fetchInvoices]);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      setChartLoading(true);
+      try {
+        const pts = await fetchTotalsByClientForPeriod(periodStart, periodEnd, clientSlug);
+        if (!cancelled) setChartPoints(pts);
+      } catch (e) {
+        console.error(e);
+        if (!cancelled) setChartPoints([]);
+      } finally {
+        if (!cancelled) setChartLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [periodStart, periodEnd, clientSlug]);
 
   const rows = payload?.data ?? [];
   const total = payload?.metadata?.total ?? 0;
@@ -359,14 +440,29 @@ export default function InvoiceListPage() {
   };
 
   return (
-    <PageContainer title="Invoice list" description="Stored invoices">
+    <PageContainer title="Main" description="Stored invoices">
       <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 2, mb: 2 }}>
         <Typography variant="h4" sx={{ fontWeight: 800 }}>
-          List
+          Main
         </Typography>
         <MuiLink component={NextLink} href="/invoice/cash-pickup" underline="hover">
           Cash pickup
         </MuiLink>
+      </Box>
+
+      <Box sx={{ mb: 3 }}>
+        <BlankCard>
+          <CardContent>
+            <Typography variant="h6" fontWeight={700} sx={{ mb: 0.5 }}>
+              Totals by client
+            </Typography>
+            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+              Sum of invoice totals for the selected period
+              {clientSlug.trim() ? " (current client filter)." : " (all clients)."}
+            </Typography>
+            <InvoiceClientTotalsChart points={chartPoints} loading={chartLoading} />
+          </CardContent>
+        </BlankCard>
       </Box>
 
       <BlankCard>

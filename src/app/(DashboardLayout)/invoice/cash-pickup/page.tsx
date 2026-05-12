@@ -257,7 +257,7 @@ export default function CashPickupPdfPage() {
           Cash pickup
         </Typography>
         <MuiLink component={NextLink} href="/invoice/list" underline="hover">
-          Invoice list
+          Main
         </MuiLink>
       </Box>
 

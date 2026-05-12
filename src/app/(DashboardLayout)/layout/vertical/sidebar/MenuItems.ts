@@ -111,7 +111,7 @@ const Menuitems: MenuitemsType[] = [
   },
   {
     id: uniqueId(),
-    title: "List",
+    title: "Main",
     icon: IconList,
     href: "/invoice/list",
   },
