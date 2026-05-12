@@ -32,6 +32,9 @@ export async function GET(
     const search = request.nextUrl.searchParams.toString();
     const url = `${pickupBaseUrl}/api/pickup/${segment}${search ? `?${search}` : ""}`;
 
+    // TODO: remove temporary pickup upstream URL logging
+    console.log("[pickup proxy] GET", url);
+
     const res = await logMaintenanceFetch(url, { method: "GET", headers });
     const text = await res.text();
 

@@ -10,8 +10,7 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     autoRefreshToken: true,
     detectSessionInUrl: false, // Changed to false to prevent URL-based session detection
     flowType: 'pkce', // Use PKCE flow for better session handling
-    debug: true, // Set to true temporarily if you need to debug auth issues
-
+    debug: false, // true = verbose GoTrueClient logs in the browser console
   },
   global: {
     headers: {
@@ -35,7 +34,7 @@ export const supabaseForPasswordReset = createClient(supabaseUrl, supabaseAnonKe
     autoRefreshToken: true,
     detectSessionInUrl: true, // Enable for password reset to detect token from URL hash
     flowType: 'pkce',
-    debug: true,
+    debug: false,
   },
   global: {
     headers: {
