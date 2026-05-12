@@ -3,7 +3,9 @@ import { logMaintenanceFetch } from "@/app/api/maintenance/requestLog";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
-const pickupBaseUrl = (process.env.NEXT_PUBLIC_API_2_URL ?? "").replace(/\/$/, "");
+
+/** Same base convention as `src/app/api/invoices/route.ts` (`https://host/api`, no trailing slash). */
+const apiBaseUrl = (process.env.NEXT_PUBLIC_API_URL ?? "").replace(/\/$/, "");
 
 const getToken = (request: NextRequest) => {
   const authHeader = request.headers.get("authorization");
@@ -15,11 +17,16 @@ export async function GET(
   { params }: { params: Promise<{ path: string[] }> }
 ) {
   try {
-    if (!pickupBaseUrl) {
-      return NextResponse.json({ error: "API 2 URL not configured" }, { status: 500 });
+    const { path } = await params;
+    const incoming = `${request.nextUrl.pathname}${request.nextUrl.search}`;
+    // Server-side only: appears in the terminal running `next dev` / `next start`, not in the browser console.
+    console.log("[pickup proxy] incoming", incoming, { path });
+
+    if (!apiBaseUrl) {
+      console.warn("[pickup proxy] NEXT_PUBLIC_API_URL is empty; skipping upstream");
+      return NextResponse.json({ error: "NEXT_PUBLIC_API_URL not configured" }, { status: 500 });
     }
 
-    const { path } = await params;
     if (!path?.length) {
       return NextResponse.json({ error: "Path required" }, { status: 400 });
     }
@@ -30,10 +37,10 @@ export async function GET(
 
     const segment = path.join("/");
     const search = request.nextUrl.searchParams.toString();
-    const url = `${pickupBaseUrl}/api/pickup/${segment}${search ? `?${search}` : ""}`;
+    const url = `${apiBaseUrl}/pickup/${segment}${search ? `?${search}` : ""}`;
 
     // TODO: remove temporary pickup upstream URL logging
-    console.log("[pickup proxy] GET", url);
+    console.log("[pickup proxy] upstream GET", url);
 
     const res = await logMaintenanceFetch(url, { method: "GET", headers });
     const text = await res.text();

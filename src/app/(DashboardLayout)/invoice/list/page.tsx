@@ -66,7 +66,7 @@ function isCompanyShape(x: unknown): x is Record<string, unknown> {
   return !!x && typeof x === "object" && typeof (x as Record<string, unknown>).slug === "string";
 }
 
-/** Same response as `GET {{API_2}}/api/pickup/all-gerai`. */
+/** Same response as upstream `GET {NEXT_PUBLIC_API_URL}/pickup/all-gerai` (proxied via `/api/pickup/all-gerai`). */
 function parseAllGerai(json: unknown): Company[] {
   if (!json || typeof json !== "object") return [];
   const root = json as Record<string, unknown>;
